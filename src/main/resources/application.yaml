@@ -1,0 +1,12 @@
+spring:
+  application:
+  name=: neTo-many
+  jpa:
+  hibernate:
+  ddl-auto: update
+  datasource:
+    url : jdbc:postgresql://localhost:5432/student_db
+    username : postgres
+    password : password
+    driver-class-name : org.postgresql.Driver
+
