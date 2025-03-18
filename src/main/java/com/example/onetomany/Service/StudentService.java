@@ -16,10 +16,11 @@ import org.springframework.stereotype.Service;
 public class StudentService {
     private final StudentsRepository studentsRepository;
     private final AddressService addressService;
+    private final StudentMapper studentMapper;
 
     public void  CreateStudent(StudentDto studentDto) {
         log.info("actionLog.createStudent.start for name: {} and surname : {} ", studentDto.getName() , studentDto.getSurname() );
-        StudentEntity entity = StudentMapper.toEntity(studentDto);
+        StudentEntity entity = StudentMapper.INSTANCE.toEntity(studentDto);
         studentsRepository.save(entity);
         log.info("actionLog.createStudent.end for name : {} and surname : {} ", studentDto.getName() , studentDto.getSurname() );
     }
@@ -28,6 +29,6 @@ public class StudentService {
         log.info("actionLog.getStudentById.start for id : {} ", id );
         StudentEntity entity = studentsRepository.findById(id).orElseThrow(()->new NotFoundException("Student not found with id " + id));
         log.info("actionLog.getStudentById.end for id : {} ", id );
-        return StudentMapper.toDto(entity);
+        return StudentMapper.INSTANCE.toDto(entity);
     }
 }
